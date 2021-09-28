@@ -146,11 +146,7 @@ export default {
 };
 </script>
 <style scoped>
-img{
-    max-height: 15rem;
-  width: 15rem;
-}
-imgs {
+img {
   border: solid 1px;
   max-height: 15rem;
   width: 15rem;
@@ -158,7 +154,7 @@ imgs {
   position: relative;
   z-index: 2;
 }
-.cuerpos {
+.cuerpo {
   z-index: 1;
   margin-top: -3rem;
   border: solid 1px;
@@ -169,17 +165,17 @@ imgs {
 
   backdrop-filter: blur(5px);
 }
-.col-md-6s,
-.col-md-4s {
+.col-md-6,
+.col-md-4 {
   margin-bottom: 1rem;
 }
-.col-md-2s {
+.col-md-2 {
   max-width: 5rem;
   margin-bottom: 1rem;
   padding: 0rem;
   margin-left: 1rem;
 }
-.derechas {
+.derecha {
   margin-right: 2rem;
 }
 </style>
