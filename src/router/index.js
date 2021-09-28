@@ -1,11 +1,30 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
+import ListarUsuario from '../views/usuarios/Listar.vue'
+import ListarEstudiante from '../views/alumnos/Listar.vue'
+import EditarEstudiante from '../views/alumnos/Editar.vue'
 
 const routes = [
   {
     path: '/',
     name: 'Home',
     component: Home
+  },
+  {
+    path: '/usuarios',
+    name: 'ListarUsuario',
+    component: ListarUsuario
+  },
+  {
+    path: '/estudiantes',
+    name: 'ListarEstudiante',
+    component: ListarEstudiante
+  },
+  {
+    path: '/estudiantes/edit/:id',
+    name: 'EditarEstudiante',
+    component: EditarEstudiante,
+    props:true
   },
   {
     path: '/about',
