@@ -216,6 +216,12 @@ body {
   border-radius: 12px;
   white-space: nowrap;
 }
+
+.sidebar ul li .router-link-active{
+  color: #11101d;
+  background: #fff;
+}
+
 .sidebar ul li a:hover {
   color: #11101d;
   background: #fff;
