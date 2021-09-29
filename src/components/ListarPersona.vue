@@ -34,8 +34,14 @@
 export default {
     name:"ListarPersona",
     props:{
-        usuarios:[],
+        usuarios:null,
         mensaje: String
     }
 }
 </script>
+
+<style scoped>
+h1::first-letter{
+  text-transform: uppercase;
+}
+</style>

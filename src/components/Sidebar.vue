@@ -9,45 +9,45 @@
     </div>
     <ul class="nav_list">
       <li>
-        <a href="/">
+        <router-link to="/">
           <i class="bx bx-grid-alt"></i>
           <span class="links_name">Dashboard</span>
-        </a>
+        </router-link>
         <span class="tooltip">Dashboard</span>
       </li>
       <li>
-        <a href="/usuarios">
+        <router-link to="/usuarios">
           <i class="bx bxs-user"></i>
           <span class="links_name">Usuarios</span>
-        </a>
+        </router-link>
         <span class="tooltip">Usuarios</span>
       </li>
       <li>
-        <a href="#">
+        <router-link to="/">
           <i class="bx bxs-group"></i>
           <span class="links_name">Docentes</span>
-        </a>
+        </router-link>
         <span class="tooltip">Docentes</span>
       </li>
       <li>
-        <a href="/estudiantes">
+        <router-link to="/estudiantes">
           <i class="bx bxs-contact"></i>
           <span class="links_name">Estudiantes</span>
-        </a>
+        </router-link>
         <span class="tooltip">Estudiantes</span>
       </li>
       <li>
-        <a href="#">
+        <router-link to="/">
           <i class="bx bx-book-bookmark"></i>
           <span class="links_name">Materias</span>
-        </a>
+        </router-link>
         <span class="tooltip">Materias</span>
       </li>
       <li>
-        <a href="#">
+        <router-link to="/">
           <i class="bx bx-cog"></i>
           <span class="links_name">Configuracion</span>
-        </a>
+        </router-link>
         <span class="tooltip">Configuracion</span>
       </li>
     </ul>
@@ -64,9 +64,9 @@
           </div>
         </div>
         <li>
-          <a href="/login">
+          <router-link to="/login">
             <i class="bx bx-log-out" id="log_out"></i>
-          </a>
+          </router-link>
         </li>
       </div>
     </div>
