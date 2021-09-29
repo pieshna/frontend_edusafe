@@ -8,7 +8,7 @@ export default {
   name: "ListarEstudiante",
   data() {
     return {
-      host: "http://localhost:3000",
+      host: process.env.VUE_APP_DB_HOST,
       usuarios: [],
     };
   },

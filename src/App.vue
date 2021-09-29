@@ -1,6 +1,5 @@
 <template>
   <Sidebar />
-  <router-view/>
 </template>
 <script>
 // @ is an alias to /src
@@ -39,25 +38,5 @@ export default {
     width: calc(100%-15rem);
     left:15rem;
 } */
-.home_content {
-  background:blue;
-  position: absolute;
-  height: 100%;
-  width: calc(100%-5rem);
-  left: 5rem;
-  transition: all 0.5s ease;
-}
-
-.home_content .text {
-  font-size: 25px;
-  font-weight: 500;
-  color: #1d1b31;
-  margin-top: 12px;
-}
-.sidebar.active ~ .home_content {
-  background:red;
-  width: calc(100%-15rem);
-  left: 15rem;
-}
 
 </style>

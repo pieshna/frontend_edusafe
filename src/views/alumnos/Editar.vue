@@ -112,7 +112,7 @@ export default {
   name: "EditarEstudiante",
   data() {
     return {
-      host: "http://localhost:3000",
+      host: process.env.VUE_APP_DB_HOST,
       usuarios: {
           nombre:'',
           apellido:'',

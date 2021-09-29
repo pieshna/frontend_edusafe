@@ -64,15 +64,18 @@
           </div>
         </div>
         <li>
-          <a href="#">
+          <a href="/login">
             <i class="bx bx-log-out" id="log_out"></i>
           </a>
         </li>
       </div>
     </div>
   </div>
-  <div class="home_content">
-    <div class="text">Home</div>
+  <div class="home_content py-2">
+    <div class="contenido py-5">
+
+  <router-view/>
+    </div>
   </div>
 </template>
 
@@ -82,7 +85,6 @@ export default {
   methods: {
     botonSide() {
       let sidebar = document.querySelector(".sidebar");
-      console.log("Click");
       sidebar.classList.toggle("active");
     },
   },
@@ -114,6 +116,7 @@ body {
   background: #11101d;
   padding: 0.4rem 0.8rem;
   transition: all 0.5s ease;
+  z-index: 10;
 }
 
 .sidebar.active {
@@ -131,7 +134,7 @@ body {
   transition: all 0.5s ease;
 }
 
-.sidebar.active .content_logo .logo {
+.sidebar.active .logo_content .logo {
   opacity: 1;
   pointer-events: none;
 }
@@ -308,10 +311,13 @@ body {
 
 .home_content {
   position: absolute;
-  height: 100%;
-  width: calc(100%-5rem);
-  left: 5rem;
+  /* height: 100%; */
+  width: 94%;
+  left: 0rem;
   transition: all 0.5s ease;
+  margin-left: 5rem;
+  border:2px solid red;
+  z-index: 2;
 }
 
 .home_content .text {
@@ -321,7 +327,21 @@ body {
   margin-top: 12px;
 }
 .sidebar.active ~ .home_content {
-  width: calc(100%-15rem);
+  width: 83.6%;
+  margin-left:0rem;
+  background-color:blue;
   left: 15rem;
 }
+
+.contenido{
+  transition: all 0.5s ease;
+  margin-left: 5rem;
+  border: 2px solid black;
+}
+
+.sidebar.active ~ .home_content .contenido{
+  transition: all 0.5s ease;
+  margin-left: 1rem;
+}
+
 </style>
