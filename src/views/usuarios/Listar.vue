@@ -1,5 +1,5 @@
 <template>
-<ListarPersona :usuarios=this.usuarios mensaje="usuarios" />
+<ListarPersona :datosUsuarios=this.usuarios mensaje="usuarios" />
   
 </template>
 <script>

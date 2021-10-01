@@ -1,5 +1,5 @@
 <template>
-  <ListarPersona :usuarios=this.usuarios mensaje="estudiantes" />
+  <ListarPersona :datosUsuarios=this.usuarios mensaje="estudiantes" />
 </template>
 <script>
 import axios from "axios";

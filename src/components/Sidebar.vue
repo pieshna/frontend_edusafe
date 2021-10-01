@@ -72,9 +72,9 @@
     </div>
   </div>
   <div class="home_content py-2">
-    <div class="contenido py-5">
-
-  <router-view/>
+    <div class="contenido py-2">
+      <br/><br/>
+      <router-view />
     </div>
   </div>
 </template>
@@ -198,7 +198,7 @@ body {
   display: block;
 }
 .sidebar.active li:hover .tooltip {
-  opacity:0;
+  opacity: 0;
 }
 
 .sidebar ul li:hover .tooltip {
@@ -217,7 +217,7 @@ body {
   white-space: nowrap;
 }
 
-.sidebar ul li .router-link-active{
+.sidebar ul li .router-link-active {
   color: #11101d;
   background: #fff;
 }
@@ -334,20 +334,19 @@ body {
 }
 .sidebar.active ~ .home_content {
   width: 83.6%;
-  margin-left:0rem;
+  margin-left: 0rem;
   /* background-color:blue; */
   left: 15rem;
 }
 
-.contenido{
+.contenido {
   transition: all 0.5s ease;
   margin-left: 5rem;
   /* border: 2px solid black; */
 }
 
-.sidebar.active ~ .home_content .contenido{
+.sidebar.active ~ .home_content .contenido {
   transition: all 0.5s ease;
   margin-left: 1rem;
 }
-
 </style>

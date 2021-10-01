@@ -1,25 +1,57 @@
 <template>
   <div class="container">
-    <h1 class="text-center">{{mensaje}}</h1>
-    <br>
-    <div class="row">
-      <div class="col-md-3 py-2" v-for="usuario in usuarios" :key="usuario.id">
-        <div class="card" style="width: 18rem;">
-          <img :src=usuario.foto class="card-img-top" alt="..." />
+    <input type="text" placeholder="Buscar usuario" @keyup="buscarPersona" v-model="search.item">{{search.item}}
+    <h1 class="text-center">{{ mensaje }}</h1>
+    <br />
+    <div class="row justify-content-center">
+      <div
+        class="col-md-3 py-2"
+        v-for="usuario in displayedPersonas"
+        :key="usuario.id"
+      >
+        <div class="card">
+          <img :src="usuario.foto" class="card-img-top" alt="..." />
           <div class="card-body">
-            <h5 class="card-title" style="width: 15rem">{{usuario.nombre}} {{usuario.apellido}}</h5>
-            
-              <ul class="card-text">
-                  <li> Usuario: {{usuario.usuario}} </li>
-                  <li> Correo: {{usuario.correo}} </li>
-                  <li> numero: {{usuario.numero}} </li>
-                  <li v-if="usuario.rol==1 && mensaje=='Usuarios'"> Rol: Director </li>
-                  <li v-if="usuario.rol==2 && mensaje=='Usuarios'"> Rol: Secretario (a) </li>
-                  <li v-if="usuario.rol==3 && mensaje=='Usuarios'"> Rol: Docente </li>
-                  <li v-if="usuario.rol==4 && mensaje=='Usuarios'"> Rol: Estudiante </li>
-                  <li v-if="usuario.rol==5 && mensaje=='Usuarios'"> Rol: Encargado </li>
-              </ul>
-              <router-link :to="'/'+mensaje+'/edit/'+usuario.id">
+            <h5 class="card-title">
+              {{ usuario.nombre }}
+            </h5>
+            <h5 class="card-title">{{ usuario.apellido }}</h5>
+
+            <ul class="card-text">
+              <li>
+                Usuario:
+                <p>{{ usuario.usuario }}</p>
+              </li>
+              <li>
+                Correo:
+                <p>{{ usuario.correo }}</p>
+              </li>
+              <li>
+                numero:
+                <p>{{ usuario.numero }}</p>
+              </li>
+              <li v-if="usuario.rol == 1 && mensaje == 'usuarios'">
+                Rol:
+                <p>Director</p>
+              </li>
+              <li v-if="usuario.rol == 2 && mensaje == 'usuarios'">
+                Rol:
+                <p>Secretario (a)</p>
+              </li>
+              <li v-if="usuario.rol == 3 && mensaje == 'usuarios'">
+                Rol:
+                <p>Docente</p>
+              </li>
+              <li v-if="usuario.rol == 4 && mensaje == 'usuarios'">
+                Rol:
+                <p>Estudiante</p>
+              </li>
+              <li v-if="usuario.rol == 5 && mensaje == 'usuarios'">
+                Rol:
+                <p>Encargado</p>
+              </li>
+            </ul>
+            <router-link :to="'/' + mensaje + '/edit/' + usuario.id">
               <button class="btn btn-block btn-primary">
                 Editar
               </button></router-link
@@ -28,20 +60,151 @@
         </div>
       </div>
     </div>
+    <br /><br />
+    <div class="row justify-content-center">
+      <div class="btn-group col-md-2">
+        <button
+          type="button"
+          v-if="page != 1"
+          @click="page--"
+          class="btn btn-sm btn-outline-secondary"
+        >
+          Anterior
+        </button>
+        <button
+          type="button"
+          @click="page = Numerodepagina"
+          v-for="Numerodepagina in pages.slice(page - 1, page + 5)"
+          :key="Numerodepagina"
+          class="btn btn-sm btn-outline-secondary"
+        >
+          {{ Numerodepagina }}
+        </button>
+        <button
+          type="button"
+          v-if="page < pages.length"
+          @click="page++"
+          class="btn btn-sm btn-outline-secondary"
+        >
+          Siguiente
+        </button>
+      </div>
+    </div>
   </div>
 </template>
 <script>
 export default {
-    name:"ListarPersona",
-    props:{
-        usuarios:null,
-        mensaje: String
+  name: "ListarPersona",
+  props: {
+    datosUsuarios: null,
+    mensaje: String,
+  },
+  data() {
+    return {
+      usuarios: null,
+      search:{
+        item:"",
+        setTimeout:null,
+
+      },
+      page: 1,
+      perPage: 4,
+      pages: [],
+      exportamos:1,
+    };
+  },
+  methods: {
+    paginate(persona) {
+      let page = this.page;
+      let perPage = this.perPage;
+      let from = page * perPage - perPage;
+      let to = page * perPage;
+      this.setPersonas();
+      return persona.slice(from, to);
+    },
+    setPersonas() {
+      this.pages = [];
+      let numerodepaginas = Math.ceil(this.usuarios.length / this.perPage);
+      for (let index = 1; index <= numerodepaginas; index++) {
+        this.pages.push(index);
+      }
+    },
+    buscarPersona(){
+      if(this.search.item!=""){
+        clearTimeout(this.search.setTimeout)
+        this.search.setTimeout=setTimeout(()=>{
+          this.usuarios=this.datosUsuarios
+          const valor=this.usuarios.filter((item)=>{
+            this.pages=[];
+            let resultado=item.nombre.toLowerCase().includes(this.search.item.toLowerCase())
+            if(resultado==false){
+              resultado=item.apellido.toLowerCase().includes(this.search.item.toLowerCase())
+            }
+            return resultado
+          })
+          console.log(valor);
+          this.usuarios=valor
+        },300)
+
+      }else{
+        this.usuarios=this.datosUsuarios
+      }
     }
-}
+  },
+  computed: {
+    displayedPersonas() {
+      if(this.exportamos===1||this.exportamos==2){
+        this.usuarios=this.datosUsuarios
+        console.log(this.usuarios);
+        this.exportamos++
+      }
+      return this.paginate(this.usuarios);
+    },
+  },
+  watch: {
+    personas() {
+      this.setPersonas();
+    },
+  },
+};
 </script>
 
 <style scoped>
-h1::first-letter{
+h1::first-letter {
   text-transform: uppercase;
+}
+
+.card {
+  align-items: center;
+  background: #f5f6fa;
+}
+.py-2 {
+  border: 2px solid;
+}
+.card img {
+  max-width: 10rem;
+  top: -8rem;
+}
+
+.card-body ul {
+  list-style: none;
+}
+.card-body li {
+  margin-left: -1.5rem;
+  display: flex;
+  font-weight: bold;
+}
+
+.card-body li p {
+  left: 0.5rem;
+  font-weight: normal;
+}
+
+.card-title {
+  text-align: center;
+}
+.card-body {
+  background: #7f8fa6;
+  flex-basis: auto;
 }
 </style>
