@@ -333,7 +333,7 @@ body {
   margin-top: 12px;
 }
 .sidebar.active ~ .home_content {
-  width: 83.6%;
+  width: 83.4%;
   margin-left: 0rem;
   /* background-color:blue; */
   left: 15rem;

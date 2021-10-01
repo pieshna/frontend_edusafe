@@ -1,5 +1,15 @@
 <template>
   <div class="container">
+    <div class="container" v-if="mensaje=='usuarios'">
+
+    <select @change="filtro"  v-model="search.categoria">
+     <option value="0" selected >General</option>
+     <option value="2" >Secretario (a)</option>
+     <option value="3" >Docente</option>
+     <option value="4" >Estudiante</option>
+     <option value="5" >Encargado</option>
+    </select>
+    </div>
     <input type="text" placeholder="Buscar usuario" @keyup="buscarPersona" v-model="search.item">{{search.item}}
     <h1 class="text-center">{{ mensaje }}</h1>
     <br />
@@ -9,7 +19,7 @@
         v-for="usuario in displayedPersonas"
         :key="usuario.id"
       >
-        <div class="card">
+        <div class="card" v-if="search.categoria==0||search.categoria==usuario.rol">
           <img :src="usuario.foto" class="card-img-top" alt="..." />
           <div class="card-body">
             <h5 class="card-title">
@@ -27,7 +37,7 @@
                 <p>{{ usuario.correo }}</p>
               </li>
               <li>
-                numero:
+                Numero:
                 <p>{{ usuario.numero }}</p>
               </li>
               <li v-if="usuario.rol == 1 && mensaje == 'usuarios'">
@@ -61,7 +71,7 @@
       </div>
     </div>
     <br /><br />
-    <div class="row justify-content-center">
+    <div class="row justify-content-center" v-if="pages.length>1">
       <div class="btn-group col-md-2">
         <button
           type="button"
@@ -105,7 +115,7 @@ export default {
       search:{
         item:"",
         setTimeout:null,
-
+        categoria:0
       },
       page: 1,
       perPage: 4,
@@ -142,20 +152,31 @@ export default {
             }
             return resultado
           })
-          console.log(valor);
           this.usuarios=valor
         },300)
-
       }else{
         this.usuarios=this.datosUsuarios
       }
+    },
+    filtro(){
+      this.usuarios=this.datosUsuarios
+      this.buscarPersona()
+      const valor=this.usuarios.filter((item)=>{
+            if(item.rol==this.search.categoria){
+              this.pages=[];
+              return true
+            }
+          })
+          this.usuarios=valor
+          if(this.search.categoria==0){
+            this.usuarios=this.datosUsuarios
+          }
     }
   },
   computed: {
     displayedPersonas() {
       if(this.exportamos===1||this.exportamos==2){
         this.usuarios=this.datosUsuarios
-        console.log(this.usuarios);
         this.exportamos++
       }
       return this.paginate(this.usuarios);
