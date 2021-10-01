@@ -19,7 +19,7 @@ export default {
   methods: {
     async consultarUsuario() {
       await axios
-        .get(`${this.host}/usuario`)
+        .get(`${this.host}usuario`)
         .then((respuesta) => {
           this.usuarios = respuesta.data;
           //console.log(this.usuarios);

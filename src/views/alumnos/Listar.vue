@@ -18,7 +18,7 @@ export default {
   methods: {
     async consultarUsuario() {
       await axios
-        .get(`${this.host}/usuario/rol/4`)
+        .get(`${this.host}usuario/rol/4`)
         .then((respuesta) => {
           this.usuarios = respuesta.data;
           //console.log(this.usuarios);
