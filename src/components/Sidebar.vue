@@ -322,7 +322,7 @@ body {
   left: 0rem;
   transition: all 0.5s ease;
   margin-left: 5rem;
-  border:2px solid red;
+  /* border:2px solid red; */
   z-index: 2;
 }
 
@@ -335,14 +335,14 @@ body {
 .sidebar.active ~ .home_content {
   width: 83.6%;
   margin-left:0rem;
-  background-color:blue;
+  /* background-color:blue; */
   left: 15rem;
 }
 
 .contenido{
   transition: all 0.5s ease;
   margin-left: 5rem;
-  border: 2px solid black;
+  /* border: 2px solid black; */
 }
 
 .sidebar.active ~ .home_content .contenido{

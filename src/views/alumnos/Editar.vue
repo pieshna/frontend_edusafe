@@ -142,6 +142,12 @@ export default {
           console.log(error);
         });
     },
+    onFileChange(event) {
+      this.hotImage.imagen = event.target.files[0];
+      //this.producto.imagen=`${fileData.name}`;
+      this.hotImage.urlImagen = URL.createObjectURL(this.hotImage.imagen);
+      console.log(this.hotImage.imagen);
+    },
   },
 };
 </script>
