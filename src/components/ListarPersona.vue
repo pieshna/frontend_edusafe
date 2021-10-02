@@ -1,28 +1,28 @@
 <template>
   <div class="container">
-    <div class="container" v-if="mensaje=='usuarios'">
-
-    <select @change="filtro"  v-model="search.categoria">
-     <option value="0" selected >General</option>
-     <option value="2" >Secretario (a)</option>
-     <option value="3" >Docente</option>
-     <option value="4" >Estudiante</option>
-     <option value="5" >Encargado</option>
-    </select>
+    <div class="container" v-if="mensaje == 'usuarios'">
+      <select @change="filtro" v-model="search.categoria">
+        <option value="0" selected>General</option>
+        <option value="2">Secretario (a)</option>
+        <option value="3">Docente</option>
+        <option value="4">Estudiante</option>
+        <option value="5">Encargado</option>
+      </select>
     </div>
-    <input type="text" placeholder="Buscar usuario" @keyup="buscarPersona" v-model="search.item">{{search.item}}
-    <router-link :to="'/'+mensaje+'/nuevo'" >
-    <a class="btn">Nuevo</a>
+    <input
+      type="text"
+      placeholder="Buscar usuario"
+      @keyup="buscarPersona"
+      v-model="search.item"
+    />{{ search.item }}
+    <router-link :to="'/' + mensaje + '/nuevo'">
+      <a class="btn">Nuevo</a>
     </router-link>
     <h1 class="text-center">{{ mensaje }}</h1>
     <br />
     <div class="row justify-content-center">
-      <div
-        class="col-md-3 py-2"
-        v-for="usuario in displayedPersonas"
-        :key="usuario.id"
-      >
-        <div class="card" v-if="search.categoria==0||search.categoria==usuario.rol">
+      <div class="col-md-3 py-2" v-for="usuario in displayedPersonas" :key="usuario.id">
+        <div class="card" v-if="search.categoria == 0 || search.categoria == usuario.rol">
           <img :src="usuario.foto" class="card-img-top" alt="..." />
           <div class="card-body">
             <h5 class="card-title">
@@ -74,32 +74,69 @@
       </div>
     </div>
     <br /><br />
-    <div class="row justify-content-center" v-if="pages.length>1">
+    <div class="row justify-content-center" v-if="pages.length > 1">
       <div class="btn-group col-md-2">
+        <button
+          type="button"
+          v-if="page != 1"
+          @click="page=1"
+          class="btn btn-sm btn-outline-secondary"
+        >
+          <i class="fa-solid fa-angles-left"></i>
+        </button>
         <button
           type="button"
           v-if="page != 1"
           @click="page--"
           class="btn btn-sm btn-outline-secondary"
         >
-          Anterior
+          <i class="fa-solid fa-angle-left"></i>
         </button>
         <button
           type="button"
+          v-if="page >= 3"
+          @click="page -= 2"
+          class="btn btn-sm btn-outline-secondary"
+        >
+          {{ page - 2 }}
+        </button>
+        <button
+          type="button"
+          v-if="page != 1"
+          @click="page--"
+          class="btn btn-sm btn-outline-secondary"
+        >
+          {{ page - 1 }}
+        </button>
+        <div
+          type="button"
           @click="page = Numerodepagina"
-          v-for="Numerodepagina in pages.slice(page - 1, page + 5)"
+          v-for="Numerodepagina in pages.slice(page - 1, page + 3)"
           :key="Numerodepagina"
           class="btn btn-sm btn-outline-secondary"
         >
-          {{ Numerodepagina }}
-        </button>
+          <div v-if="Numerodepagina == page" class="seleccionado">
+            {{ Numerodepagina }}
+          </div>
+          <div v-if="Numerodepagina != page">
+            {{ Numerodepagina }}
+          </div>
+        </div>
         <button
           type="button"
           v-if="page < pages.length"
           @click="page++"
           class="btn btn-sm btn-outline-secondary"
         >
-          Siguiente
+          <i class="fa-solid fa-angle-right"></i>
+        </button>
+        <button
+          type="button"
+          v-if="page < pages.length"
+          @click="page=pages.length"
+          class="btn btn-sm btn-outline-secondary"
+        >
+          <i class="fa-solid fa-angles-right"></i>
         </button>
       </div>
     </div>
@@ -115,15 +152,15 @@ export default {
   data() {
     return {
       usuarios: null,
-      search:{
-        item:"",
-        setTimeout:null,
-        categoria:0
+      search: {
+        item: "",
+        setTimeout: null,
+        categoria: 0,
       },
       page: 1,
-      perPage: 4,
+      perPage: 2,
       pages: [],
-      exportamos:1,
+      exportamos: 1,
     };
   },
   methods: {
@@ -142,45 +179,45 @@ export default {
         this.pages.push(index);
       }
     },
-    buscarPersona(){
-      if(this.search.item!=""){
-        clearTimeout(this.search.setTimeout)
-        this.search.setTimeout=setTimeout(()=>{
-          this.usuarios=this.datosUsuarios
-          const valor=this.usuarios.filter((item)=>{
-            this.pages=[];
-            let resultado=item.nombre.toLowerCase().includes(this.search.item.toLowerCase())
-            if(resultado==false){
-              resultado=item.apellido.toLowerCase().includes(this.search.item.toLowerCase())
+    buscarPersona() {
+      if (this.search.item != "") {
+        clearTimeout(this.search.setTimeout);
+        this.search.setTimeout = setTimeout(() => {
+          this.usuarios = this.datosUsuarios;
+          const valor = this.usuarios.filter((item) => {
+            this.pages = [];
+            let resultado = item.nombre.toLowerCase().includes(this.search.item.toLowerCase());
+            if (resultado == false) {
+              resultado = item.apellido.toLowerCase().includes(this.search.item.toLowerCase());
             }
-            return resultado
-          })
-          this.usuarios=valor
-        },300)
-      }else{
-        this.usuarios=this.datosUsuarios
+            return resultado;
+          });
+          this.usuarios = valor;
+        }, 300);
+      } else {
+        this.usuarios = this.datosUsuarios;
       }
     },
-    filtro(){
-      this.usuarios=this.datosUsuarios
-      this.buscarPersona()
-      const valor=this.usuarios.filter((item)=>{
-            if(item.rol==this.search.categoria){
-              this.pages=[];
-              return true
-            }
-          })
-          this.usuarios=valor
-          if(this.search.categoria==0){
-            this.usuarios=this.datosUsuarios
-          }
-    }
+    filtro() {
+      this.usuarios = this.datosUsuarios;
+      this.buscarPersona();
+      const valor = this.usuarios.filter((item) => {
+        if (item.rol == this.search.categoria) {
+          this.pages = [];
+          return true;
+        }
+      });
+      this.usuarios = valor;
+      if (this.search.categoria == 0) {
+        this.usuarios = this.datosUsuarios;
+      }
+    },
   },
   computed: {
     displayedPersonas() {
-      if(this.exportamos===1||this.exportamos==2){
-        this.usuarios=this.datosUsuarios
-        this.exportamos++
+      if (this.exportamos === 1 || this.exportamos == 2) {
+        this.usuarios = this.datosUsuarios;
+        this.exportamos++;
       }
       return this.paginate(this.usuarios);
     },
@@ -230,5 +267,8 @@ h1::first-letter {
 .card-body {
   background: #7f8fa6;
   flex-basis: auto;
+}
+.seleccionado {
+  color: red;
 }
 </style>
