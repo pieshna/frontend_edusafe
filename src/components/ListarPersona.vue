@@ -11,6 +11,9 @@
     </select>
     </div>
     <input type="text" placeholder="Buscar usuario" @keyup="buscarPersona" v-model="search.item">{{search.item}}
+    <router-link :to="'/'+mensaje+'/nuevo'" >
+    <a class="btn">Nuevo</a>
+    </router-link>
     <h1 class="text-center">{{ mensaje }}</h1>
     <br />
     <div class="row justify-content-center">
