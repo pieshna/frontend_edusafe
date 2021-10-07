@@ -73,7 +73,7 @@
   </div>
   <div class="home_content py-2">
     <div class="contenido py-2">
-      <br/><br/>
+      <br/>
       <router-view />
     </div>
   </div>
