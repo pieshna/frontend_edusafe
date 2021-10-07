@@ -34,20 +34,39 @@
         </div>
       </div>
     </div>
+    <br><br>
+    <div class="row justify-content-between">
+      <h4 class="text-center">Carreras</h4>
+      <div class="col-md-3" v-for="carrera in carrerasActuales" :key="carrera.id">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title text-center">
+              {{carrera.Nombre}}
+            </h4>
+            <ListaGradosHome :id=carrera.id />
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 import axios from "axios";
+import ListaGradosHome from "@/components/ListaGradosHome"
 
 export default {
   name: "Home",
+  components: {
+    ListaGradosHome
+    },
   data() {
     return {
       host: process.env.VUE_APP_DB_HOST,
       totalAlumnos: 0,
       totalDocentes: 0,
       totalSecretario: 0,
+      carrerasActuales:{},
     };
   },
   methods: {
@@ -56,11 +75,14 @@ export default {
         const consulta1=axios.get(this.host+"alumno/contador")
         const consulta2=axios.get(this.host+"maestro/contador")
         const consulta3=axios.get(this.host+"secretario/contador")
-        axios.all([consulta1, consulta2,consulta3]).then(axios.spread((...responses)=>{
+        const consulta4=axios.get(this.host+"carrera")
+        axios.all([consulta1, consulta2,consulta3,consulta4]).then(axios.spread((...responses)=>{
           
         this.totalAlumnos=responses[0].data[0].Actuales
         this.totalDocentes=responses[1].data[0].Actuales
         this.totalSecretario=responses[2].data[0].Actuales
+        //console.log(responses[3].data);
+        this.carrerasActuales=responses[3].data
         })).catch(error =>{
           console.log(error);
         })
