@@ -1,0 +1,132 @@
+<template>
+<div class="fondo">
+    <br>
+  <div class="box">
+    <form>
+      <h1>Inicio de Sesion</h1>
+      <input
+        type="text"
+        autocomplete="false"
+        v-model="credenciales.usuario"
+        placeholder="usuario o correo"
+      />
+      <input
+        type="password"
+        autocomplete="false"
+        v-model="credenciales.password"
+        placeholder="contraseña"
+      />
+      <input type="submit" value="Iniciar Sesion" />
+      {{ credenciales }}
+    </form>
+  </div>
+</div>
+</template>
+
+<script>
+export default {
+  name: "login",
+  data() {
+    return {
+      credenciales: {
+        usuario: "",
+        password: "",
+      },
+    };
+  },
+  created() {
+    this.eliminarSidebar();
+  },
+  methods: {
+    eliminarSidebar() {
+      let sidebar = document.querySelector(".sidebar");
+      if (!sidebar) {
+        //alert("No sidebar");
+      } else {
+        let padre = sidebar.parentNode;
+        padre.removeChild(sidebar);
+        document.querySelector(".contenido").classList.remove("py-5");
+        document.querySelector(".home_content").classList.add("fondo");
+        document.querySelector(".contenido").classList.remove("contenido");
+        document.querySelector(".home_content").classList.remove("py-2");
+        document
+          .querySelector(".home_content")
+          .classList.remove("home_content");
+      }
+    },
+  },
+};
+</script>
+
+<style>
+.fondo {
+    width: 100%;
+    height: 100%;
+  background: #34495e;
+  position: absolute;
+}
+
+.box {
+  border-radius: 1rem;
+  width: 39rem;
+  padding: 2.5rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #2c3e50;
+  text-align: center;
+}
+
+.box h1 {
+  color: white;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.box input[type="text"],
+.box input[type="password"] {
+  border: 0;
+  background: none;
+  display: block;
+  margin: 1.25rem auto;
+  text-align: center;
+  border: 2px solid #3498db;
+  padding: 0.875rem 0.625rem;
+  outline: none;
+  color: white;
+  border-radius: 2rem;
+  transition: 0.25s;
+}
+
+.box input[type="text"]:hover,
+.box input[type="password"]:hover {
+  transition: all 0.5s ease;
+  width: 26rem;
+  border-color: #27ae60;
+}
+
+.box input[type="text"]:focus,
+.box input[type="password"]:focus {
+  width: 26rem;
+  border-color: #e67e22;
+}
+
+.box input[type="submit"] {
+  border: 0;
+  background: none;
+  display: block;
+  margin: 1.25rem auto;
+  text-align: center;
+  border: 2px solid #3498db;
+  padding: 0.875rem 2rem;
+  outline: none;
+  color: white;
+  border-radius: 2rem;
+  transition: 0.25s;
+}
+
+.box input[type="submit"]:hover {
+  background: #1abc9c;
+}
+</style>
