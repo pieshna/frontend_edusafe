@@ -37,7 +37,7 @@
         <span class="tooltip">Estudiantes</span>
       </li>
       <li>
-        <router-link to="/">
+        <router-link to="/grados">
           <i class="bx bx-book-bookmark"></i>
           <span class="links_name">Materias</span>
         </router-link>

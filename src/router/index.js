@@ -9,6 +9,8 @@ import EditarUsuario from '../views/usuarios/Editar.vue'
 import ListarDocentes from '../views/docentes/Listar.vue'
 import EditarDocente from '../views/docentes/Editar.vue'
 import NuevoDocente from '../views/docentes/Nuevo.vue'
+/* Materias */
+import Materias from '../views/grados/Home.vue'
 /* Estudiantes */
 import ListarEstudiante from '../views/alumnos/Listar.vue'
 import EditarEstudiante from '../views/alumnos/Editar.vue'
@@ -57,7 +59,12 @@ const routes = [
     component: EditarEstudiante,
     props:true
   },
-
+  /* Materias */
+  {
+    path: '/grados',
+    name: 'Materias',
+    component: Materias
+  },
 
   /* Docente */
   {
