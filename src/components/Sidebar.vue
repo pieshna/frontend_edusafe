@@ -23,7 +23,7 @@
         <span class="tooltip">Usuarios</span>
       </li>
       <li>
-        <router-link to="/">
+        <router-link to="/docentes">
           <i class="bx bxs-group"></i>
           <span class="links_name">Docentes</span>
         </router-link>
@@ -200,11 +200,13 @@ body {
 .sidebar.active li:hover .tooltip {
   opacity: 0;
 }
-
+/* Solo para version de escritorio */
+@media only screen and (min-width: 80vh){
 .sidebar ul li:hover .tooltip {
   transition: all 0.5s ease;
   opacity: 1;
   top: 50%;
+}
 }
 
 .sidebar ul li a {
@@ -315,7 +317,8 @@ body {
   background: none;
 }
 
-.home_content {
+@media only screen and (min-width: 80vh){
+  .home_content {
   position: absolute;
   /* height: 100%; */
   width: 94%;
@@ -325,6 +328,22 @@ body {
   /* border:2px solid red; */
   z-index: 2;
 }
+}
+/* version movil */
+@media only screen and (max-width: 80vh){
+  .home_content {
+  position: absolute;
+  /* height: 100%; */
+  width: 94%;
+  left: 0rem;
+  transition: all 0.5s ease;
+  margin-left: 1rem;
+  border:2px solid red;
+  z-index: 2;
+}
+}
+
+
 
 .home_content .text {
   font-size: 25px;

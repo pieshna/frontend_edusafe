@@ -1,13 +1,12 @@
 <template>
-<NuevaPersona mensaje="Editar Estudiante" :urlEdit=url />
+<NuevaPersona mensaje="Editar Docente" :urlEdit=url />
 </template>
 
 <script>
-import axios from "axios";
 import NuevaPersona from "@/components/NuevaPersona"
 export default {
   props: ["id"],
-  name: "EditarEstudiante",
+  name: "EditarDocente",
   components: {NuevaPersona},
   data() {
     return {

@@ -4,9 +4,15 @@ import Home from '../views/Home.vue'
 /* Usuarios */
 import ListarUsuario from '../views/usuarios/Listar.vue'
 import NuevoUsuario from '../views/usuarios/Nuevo.vue'
+import EditarUsuario from '../views/usuarios/Editar.vue'
+/* Docentes */
+import ListarDocentes from '../views/docentes/Listar.vue'
+import EditarDocente from '../views/docentes/Editar.vue'
+import NuevoDocente from '../views/docentes/Nuevo.vue'
 /* Estudiantes */
 import ListarEstudiante from '../views/alumnos/Listar.vue'
 import EditarEstudiante from '../views/alumnos/Editar.vue'
+import NuevoEstudiante from '../views/alumnos/Nuevo.vue'
 import AuthLogin from '../views/auth/login.vue'
 
 const routes = [
@@ -26,6 +32,12 @@ const routes = [
     name:'NuevoUsuario',
     component:NuevoUsuario
   },
+  {
+    path:'/usuarios/edit/:id',
+    name:'EditarUsuario',
+    component:EditarUsuario,
+    props:true
+  },
 
 
   /* Estudiante */
@@ -33,6 +45,11 @@ const routes = [
     path: '/estudiantes',
     name: 'ListarEstudiante',
     component: ListarEstudiante
+  },
+  {
+    path: '/estudiantes/nuevo',
+    name: 'NuevoEstudiante',
+    component: NuevoEstudiante
   },
   {
     path: '/estudiantes/edit/:id',
@@ -43,7 +60,22 @@ const routes = [
 
 
   /* Docente */
-
+  {
+    path: '/docentes',
+    name: 'ListarDocentes',
+    component: ListarDocentes
+  },
+  {
+    path: '/docentes/nuevo',
+    name: 'NuevoDocente',
+    component: NuevoDocente
+  },
+  {
+    path: '/docentes/edit/:id',
+    name: 'EditarDocente',
+    component: EditarDocente,
+    props:true
+  },
 
   /* Encargado */
   

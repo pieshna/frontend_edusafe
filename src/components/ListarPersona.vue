@@ -23,7 +23,7 @@
     <div class="row justify-content-center">
       <div class="col-md-3 py-2" v-for="usuario in displayedPersonas" :key="usuario.id">
         <div class="card" v-if="search.categoria == 0 || search.categoria == usuario.rol">
-          <img :src="usuario.foto" class="card-img-top" alt="..." />
+          <img :src="host+'ver/' +usuario.foto" class="card-img-top" />
           <div class="card-body">
             <h5 class="card-title">
               {{ usuario.nombre }}
@@ -157,8 +157,9 @@ export default {
         setTimeout: null,
         categoria: 0,
       },
+      host: process.env.VUE_APP_DB_HOST,
       page: 1,
-      perPage: 2,
+      perPage: 4,
       pages: [],
       exportamos: 1,
     };
