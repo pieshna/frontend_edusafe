@@ -11,6 +11,12 @@ import EditarDocente from '../views/docentes/Editar.vue'
 import NuevoDocente from '../views/docentes/Nuevo.vue'
 /* Materias */
 import Materias from '../views/grados/Home.vue'
+import Dashboard from '../views/grados/Dashboard.vue'
+import NuevaMateria from '../views/grados/Nuevo.vue'
+import EditarMateria from '../views/grados/Editar.vue'
+/*Carreras */
+import NuevaCarrera from '../views/carreras/Nuevo.vue'
+import EditarCarrera from '../views/carreras/Editar.vue'
 /* Estudiantes */
 import ListarEstudiante from '../views/alumnos/Listar.vue'
 import EditarEstudiante from '../views/alumnos/Editar.vue'
@@ -62,8 +68,42 @@ const routes = [
   /* Materias */
   {
     path: '/grados',
+    name: 'Dashboard',
+    component: Dashboard
+  },
+  {
+    path: '/grados/menu',
     name: 'Materias',
     component: Materias
+  },
+  {
+    path: '/grados/nuevo',
+    name: 'NuevaMateria',
+    component: NuevaMateria
+  },
+  {
+    path: '/grados/edit/:id',
+    name: 'EditarMateria',
+    component: EditarMateria,
+    props:true
+  },
+
+  /*Carreras */
+  {
+    path:'/carreras/nuevo',
+    name:'NuevaCarrera',
+    component: NuevaCarrera
+  },
+  {
+    path:'/carreras/menu',
+    name:'NuevaCarrera',
+    component: NuevaCarrera
+  },
+  {
+    path:'/carreras/editar/:id',
+    name:'EditarCarrera',
+    component: EditarCarrera,
+    props:true
   },
 
   /* Docente */

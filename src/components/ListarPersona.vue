@@ -247,9 +247,9 @@ h1::first-letter {
   align-items: center;
   background: #f5f6fa;
 }
-.py-2 {
+/* .py-2 {
   border: 2px solid;
-}
+} */
 .card img {
   max-width: 10rem;
   top: -8rem;

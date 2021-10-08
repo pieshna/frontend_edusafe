@@ -1,5 +1,6 @@
 <template>
   <div class="list-group">
+    <a v-if="datos.length<1" class="list-group-item list-group-item-action">No hay Grados asignados</a>
       <router-link to="/">
     <a v-for="grado in datos" :key="grado.id" class="list-group-item list-group-item-action">
 {{grado.nombre}} - {{grado.contador}}

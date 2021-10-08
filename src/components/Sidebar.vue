@@ -338,7 +338,7 @@ body {
   left: 0rem;
   transition: all 0.5s ease;
   margin-left: 1rem;
-  border:2px solid red;
+  /* border:2px solid red; */
   z-index: 2;
 }
 }
