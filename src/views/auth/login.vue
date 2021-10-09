@@ -1,41 +1,48 @@
 <template>
-<div class="fondo">
-    <br>
-  <div class="box">
-    <form>
-      <h1>Inicio de Sesion</h1>
-      <input
-        type="text"
-        autocomplete="false"
-        v-model="credenciales.usuario"
-        placeholder="usuario o correo"
-      />
-      <input
-        type="password"
-        autocomplete="false"
-        v-model="credenciales.password"
-        placeholder="contraseña"
-      />
-      <input type="submit" value="Iniciar Sesion" />
-      {{ credenciales }}
-    </form>
+  <div class="fondo">
+    <br />
+    <div class="box">
+      <form @submit.prevent="iniciarSesion">
+        <h1>Inicio de Sesion</h1>
+        <p>{{mensaje}}</p>
+        <input
+          type="text"
+          autocomplete="false"
+          v-model="credenciales.usuario"
+          placeholder="usuario o correo"
+          required
+        />
+        <input
+          type="password"
+          autocomplete="false"
+          v-model="credenciales.password"
+          placeholder="contraseña"
+          required
+        />
+        <input type="submit" value="Iniciar Sesion" />
+      </form>
+    </div>
   </div>
-</div>
 </template>
 
 <script>
+import axios from "axios";
 export default {
   name: "login",
   data() {
     return {
       credenciales: {
-        usuario: "",
-        password: "",
+        usuario: "mmpm@gmail.com",
+        password: "ldkafjslkdfj",
       },
+      mensaje:"",
+      host: process.env.VUE_APP_DB_HOST,
     };
   },
   created() {
-    this.eliminarSidebar();
+    if (this.$localStorage.get("token") != null) {
+      this.$router.push("/");
+    }
   },
   methods: {
     eliminarSidebar() {
@@ -49,19 +56,35 @@ export default {
         document.querySelector(".home_content").classList.add("fondo");
         document.querySelector(".contenido").classList.remove("contenido");
         document.querySelector(".home_content").classList.remove("py-2");
-        document
-          .querySelector(".home_content")
-          .classList.remove("home_content");
+        document.querySelector(".home_content").classList.remove("home_content");
       }
+    },
+    async iniciarSesion() {
+      await axios
+        .post(this.host + "login", this.credenciales)
+        .then((response) => {
+          if (response.status == 200) {
+            console.log(response.data);
+            this.$localStorage.set("token", "hola");
+            this.$localStorage.set("salt", response.data.rol);
+            this.$localStorage.set("teken", response.data.id);
+            this.$router.go("/");
+          }else{
+            this.mensaje="Usuario / contraseña no valido"
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
   },
 };
 </script>
 
-<style>
+<style scoped>
 .fondo {
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
   background: #34495e;
   position: absolute;
 }
@@ -78,7 +101,7 @@ export default {
   text-align: center;
 }
 
-.box h1 {
+.box h1, p {
   color: white;
   text-transform: uppercase;
   font-weight: 500;

@@ -9,11 +9,27 @@ import EditarUsuario from '../views/usuarios/Editar.vue'
 import ListarDocentes from '../views/docentes/Listar.vue'
 import EditarDocente from '../views/docentes/Editar.vue'
 import NuevoDocente from '../views/docentes/Nuevo.vue'
+import Asignacion from '../views/docentes/Asignacion.vue'
+import EditarAsignacion from '../views/docentes/EditarAsignacion.vue'
+/* Materias */
+import Materias from '../views/grados/Home.vue'
+import Dashboard from '../views/grados/Dashboard.vue'
+import NuevaMateria from '../views/grados/Nuevo.vue'
+import EditarMateria from '../views/grados/Editar.vue'
+/*Carreras */
+import NuevaCarrera from '../views/carreras/Nuevo.vue'
+import EditarCarrera from '../views/carreras/Editar.vue'
 /* Estudiantes */
 import ListarEstudiante from '../views/alumnos/Listar.vue'
 import EditarEstudiante from '../views/alumnos/Editar.vue'
 import NuevoEstudiante from '../views/alumnos/Nuevo.vue'
 import AuthLogin from '../views/auth/login.vue'
+
+/*Ver Clase */
+import VerClase from '../views/docentes/VerClase.vue'
+
+/*Tareas */
+import NuevaTarea from '../views/docentes/tareas/Nueva.vue'
 
 const routes = [
   {
@@ -57,13 +73,63 @@ const routes = [
     component: EditarEstudiante,
     props:true
   },
+  /* Materias */
+  {
+    path: '/grados',
+    name: 'Dashboard',
+    component: Dashboard
+  },
+  {
+    path: '/grados/menu',
+    name: 'Materias',
+    component: Materias
+  },
+  {
+    path: '/grados/nuevo',
+    name: 'NuevaMateria',
+    component: NuevaMateria
+  },
+  {
+    path: '/grados/edit/:id',
+    name: 'EditarMateria',
+    component: EditarMateria,
+    props:true
+  },
 
+  /*Carreras */
+  {
+    path:'/carreras/nuevo',
+    name:'NuevaCarrera',
+    component: NuevaCarrera
+  },
+  {
+    path:'/carreras/menu',
+    name:'NuevaCarrera',
+    component: NuevaCarrera
+  },
+  {
+    path:'/carreras/editar/:id',
+    name:'EditarCarrera',
+    component: EditarCarrera,
+    props:true
+  },
 
   /* Docente */
   {
     path: '/docentes',
     name: 'ListarDocentes',
     component: ListarDocentes
+  },
+  {
+    path: '/asignacion/menu',
+    name: 'Asignacion',
+    component: Asignacion
+  },
+  {
+    path: '/asignacion/editar/:id',
+    name: 'EditarAsignacion',
+    component: EditarAsignacion,
+    props:true
   },
   {
     path: '/docentes/nuevo',
@@ -74,6 +140,23 @@ const routes = [
     path: '/docentes/edit/:id',
     name: 'EditarDocente',
     component: EditarDocente,
+    props:true
+  },
+
+  /*Clases */
+
+  {
+    path: '/clase/ver/:gradoId/:materiaId',
+    name: 'VerClase',
+    component:VerClase,
+    props:true
+  },
+
+  /*Tareas */
+  {
+    path: '/tarea/nueva/:claseId/:gradoId',
+    name:'NuevaTarea',
+    component:NuevaTarea,
     props:true
   },
 

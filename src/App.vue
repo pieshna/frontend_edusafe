@@ -1,5 +1,6 @@
 <template>
-  <Sidebar />
+  <Sidebar v-if="this.$localStorage.get('token') !=null" />
+  <router-view v-if="this.$localStorage.get('token') ==null"  />
 </template>
 <script>
 // @ is an alias to /src
@@ -8,6 +9,10 @@ import Sidebar from '@/components/Sidebar.vue'
 export default {
   components: {
     Sidebar
+  },created(){
+    if(this.$localStorage.get('token')==null){
+      this.$router.push('/login')
+    }
   }
 }
 </script>

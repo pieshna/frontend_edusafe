@@ -1,29 +1,36 @@
 <template>
   <div class="container">
-    <div class="container" v-if="mensaje == 'usuarios'">
-      <select @change="filtro" v-model="search.categoria">
-        <option value="0" selected>General</option>
-        <option value="2">Secretario (a)</option>
-        <option value="3">Docente</option>
-        <option value="4">Estudiante</option>
-        <option value="5">Encargado</option>
-      </select>
+    <div class="container">
+      <div class="row justify-content-end">
+        <div class="col-auto" v-if="mensaje == 'usuarios'">
+          <select @change="filtro" class="form-select" v-model="search.categoria">
+            <option value="0" selected>General</option>
+            <option value="2">Secretario (a)</option>
+            <option value="3">Docente</option>
+            <option value="4">Estudiante</option>
+            <option value="5">Encargado</option>
+          </select>
+        </div>
+        <div class="col-md-2">
+          <input
+            type="text"
+            placeholder="Buscar usuario"
+            @keyup="buscarPersona"
+            v-model="search.item" class="form-control"
+          />
+        </div>
+      </div>
     </div>
-    <input
-      type="text"
-      placeholder="Buscar usuario"
-      @keyup="buscarPersona"
-      v-model="search.item"
-    />{{ search.item }}
     <router-link :to="'/' + mensaje + '/nuevo'">
       <a class="btn">Nuevo</a>
     </router-link>
+    <!-- Empieza la lista -->
     <h1 class="text-center">{{ mensaje }}</h1>
     <br />
     <div class="row justify-content-center">
       <div class="col-md-3 py-2" v-for="usuario in displayedPersonas" :key="usuario.id">
         <div class="card" v-if="search.categoria == 0 || search.categoria == usuario.rol">
-          <img :src="host+'ver/' +usuario.foto" class="card-img-top" />
+          <img :src="host + 'ver/' + usuario.foto" class="card-img-top" />
           <div class="card-body">
             <h5 class="card-title">
               {{ usuario.nombre }}
@@ -79,7 +86,7 @@
         <button
           type="button"
           v-if="page != 1"
-          @click="page=1"
+          @click="page = 1"
           class="btn btn-sm btn-outline-secondary"
         >
           <i class="fa-solid fa-angles-left"></i>
@@ -133,7 +140,7 @@
         <button
           type="button"
           v-if="page < pages.length"
-          @click="page=pages.length"
+          @click="page = pages.length"
           class="btn btn-sm btn-outline-secondary"
         >
           <i class="fa-solid fa-angles-right"></i>
@@ -240,9 +247,9 @@ h1::first-letter {
   align-items: center;
   background: #f5f6fa;
 }
-.py-2 {
+/* .py-2 {
   border: 2px solid;
-}
+} */
 .card img {
   max-width: 10rem;
   top: -8rem;
