@@ -9,6 +9,8 @@ import EditarUsuario from '../views/usuarios/Editar.vue'
 import ListarDocentes from '../views/docentes/Listar.vue'
 import EditarDocente from '../views/docentes/Editar.vue'
 import NuevoDocente from '../views/docentes/Nuevo.vue'
+import Asignacion from '../views/docentes/Asignacion.vue'
+import EditarAsignacion from '../views/docentes/EditarAsignacion.vue'
 /* Materias */
 import Materias from '../views/grados/Home.vue'
 import Dashboard from '../views/grados/Dashboard.vue'
@@ -111,6 +113,17 @@ const routes = [
     path: '/docentes',
     name: 'ListarDocentes',
     component: ListarDocentes
+  },
+  {
+    path: '/asignacion/menu',
+    name: 'Asignacion',
+    component: Asignacion
+  },
+  {
+    path: '/asignacion/editar/:id',
+    name: 'EditarAsignacion',
+    component: EditarAsignacion,
+    props:true
   },
   {
     path: '/docentes/nuevo',
