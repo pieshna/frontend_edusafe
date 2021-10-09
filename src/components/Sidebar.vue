@@ -15,35 +15,35 @@
         </router-link>
         <span class="tooltip">Dashboard</span>
       </li>
-      <li>
+      <li v-if="this.$localStorage.get('salt') < 3">
         <router-link to="/usuarios">
           <i class="bx bxs-user"></i>
           <span class="links_name">Usuarios</span>
         </router-link>
         <span class="tooltip">Usuarios</span>
       </li>
-      <li>
+      <li v-if="this.$localStorage.get('salt') < 3">
         <router-link to="/docentes">
           <i class="bx bxs-group"></i>
           <span class="links_name">Docentes</span>
         </router-link>
         <span class="tooltip">Docentes</span>
       </li>
-      <li>
+      <li v-if="this.$localStorage.get('salt') < 3">
         <router-link to="/estudiantes">
           <i class="bx bxs-contact"></i>
           <span class="links_name">Estudiantes</span>
         </router-link>
         <span class="tooltip">Estudiantes</span>
       </li>
-      <li>
+      <li v-if="this.$localStorage.get('salt') < 3">
         <router-link to="/grados">
           <i class="bx bx-book-bookmark"></i>
           <span class="links_name">Materias</span>
         </router-link>
         <span class="tooltip">Materias</span>
       </li>
-      <li>
+      <li v-if="this.$localStorage.get('salt') > 30">
         <router-link to="/">
           <i class="bx bx-cog"></i>
           <span class="links_name">Configuracion</span>
@@ -60,20 +60,23 @@
           />
           <div class="name_job">
             <div class="name">Nombre</div>
-            <div class="job">Rol</div>
+            <div class="job" v-if="this.$localStorage.get('salt') == 1">Director</div>
+            <div class="job" v-if="this.$localStorage.get('salt') == 2">Secretario (a)</div>
+            <div class="job" v-if="this.$localStorage.get('salt') == 3">Docente</div>
+            <div class="job" v-if="this.$localStorage.get('salt') == 4">Estudiante</div>
           </div>
         </div>
         <li>
-          <router-link to="/login">
+          <a @click="cerrarSesion">
             <i class="bx bx-log-out" id="log_out"></i>
-          </router-link>
+          </a>
         </li>
       </div>
     </div>
   </div>
   <div class="home_content py-2">
     <div class="contenido py-2">
-      <br/>
+      <br />
       <router-view />
     </div>
   </div>
@@ -86,6 +89,10 @@ export default {
     botonSide() {
       let sidebar = document.querySelector(".sidebar");
       sidebar.classList.toggle("active");
+    },
+    cerrarSesion() {
+      this.$localStorage.clear();
+      this.$router.go("/");
     },
   },
 };
@@ -201,12 +208,12 @@ body {
   opacity: 0;
 }
 /* Solo para version de escritorio */
-@media only screen and (min-width: 80vh){
-.sidebar ul li:hover .tooltip {
-  transition: all 0.5s ease;
-  opacity: 1;
-  top: 50%;
-}
+@media only screen and (min-width: 80vh) {
+  .sidebar ul li:hover .tooltip {
+    transition: all 0.5s ease;
+    opacity: 1;
+    top: 50%;
+  }
 }
 
 .sidebar ul li a {
@@ -311,39 +318,44 @@ body {
   transition: all 0.4s ease;
   background: #1d1b31;
 }
+.profile #log_out:hover {
+  color: #1d1b31;
+  background: #fff;
+}
 
 .sidebar.active .profile #log_out {
   left: 88%;
   background: none;
 }
-
-@media only screen and (min-width: 80vh){
-  .home_content {
-  position: absolute;
-  /* height: 100%; */
-  width: 94%;
-  left: 0rem;
-  transition: all 0.5s ease;
-  margin-left: 5rem;
-  /* border:2px solid red; */
-  z-index: 2;
+.sidebar.active .profile #log_out:hover {
+  color: #fff;
 }
+
+@media only screen and (min-width: 80vh) {
+  .home_content {
+    position: absolute;
+    /* height: 100%; */
+    width: 94%;
+    left: 0rem;
+    transition: all 0.5s ease;
+    margin-left: 5rem;
+    /* border:2px solid red; */
+    z-index: 2;
+  }
 }
 /* version movil */
-@media only screen and (max-width: 80vh){
+@media only screen and (max-width: 80vh) {
   .home_content {
-  position: absolute;
-  /* height: 100%; */
-  width: 94%;
-  left: 0rem;
-  transition: all 0.5s ease;
-  margin-left: 1rem;
-  /* border:2px solid red; */
-  z-index: 2;
+    position: absolute;
+    /* height: 100%; */
+    width: 94%;
+    left: 0rem;
+    transition: all 0.5s ease;
+    margin-left: 1rem;
+    /* border:2px solid red; */
+    z-index: 2;
+  }
 }
-}
-
-
 
 .home_content .text {
   font-size: 25px;

@@ -79,12 +79,12 @@
       </div>
       <input type="submit" value="Guardar" />
     </form>
-    {{ persona }}
+    <!-- {{ persona }}
     {{ datosGrado }}
     <h5>estudiante</h5>
     {{ estudiante }}
     <h4>encargado</h4>
-    {{ encargado }}
+    {{ encargado }} -->
   </div>
 </template>
 

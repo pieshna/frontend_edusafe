@@ -25,6 +25,12 @@ import EditarEstudiante from '../views/alumnos/Editar.vue'
 import NuevoEstudiante from '../views/alumnos/Nuevo.vue'
 import AuthLogin from '../views/auth/login.vue'
 
+/*Ver Clase */
+import VerClase from '../views/docentes/VerClase.vue'
+
+/*Tareas */
+import NuevaTarea from '../views/docentes/tareas/Nueva.vue'
+
 const routes = [
   {
     path: '/',
@@ -134,6 +140,23 @@ const routes = [
     path: '/docentes/edit/:id',
     name: 'EditarDocente',
     component: EditarDocente,
+    props:true
+  },
+
+  /*Clases */
+
+  {
+    path: '/clase/ver/:gradoId/:materiaId',
+    name: 'VerClase',
+    component:VerClase,
+    props:true
+  },
+
+  /*Tareas */
+  {
+    path: '/tarea/nueva/:claseId/:gradoId',
+    name:'NuevaTarea',
+    component:NuevaTarea,
     props:true
   },
 
