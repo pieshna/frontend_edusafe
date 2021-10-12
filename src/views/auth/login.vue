@@ -68,6 +68,7 @@ export default {
             this.$localStorage.set("token", "hola");
             this.$localStorage.set("salt", response.data.rol);
             this.$localStorage.set("teken", response.data.id);
+            this.$localStorage.set("photo", response.data.foto);
             this.$router.go("/");
           }else{
             this.mensaje="Usuario / contraseña no valido"

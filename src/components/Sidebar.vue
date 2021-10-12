@@ -55,7 +55,7 @@
       <div class="profile">
         <div class="profile_details">
           <img
-            src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+            :src="host+'ver/'+this.$localStorage.get('photo')"
             alt=""
           />
           <div class="name_job">
@@ -85,6 +85,10 @@
 <script>
 export default {
   name: "Sidebar",
+  data(){
+    return {
+            host: process.env.VUE_APP_DB_HOST,}
+  },
   methods: {
     botonSide() {
       let sidebar = document.querySelector(".sidebar");
