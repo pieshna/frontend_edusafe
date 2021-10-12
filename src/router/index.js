@@ -30,6 +30,8 @@ import VerClase from '../views/docentes/VerClase.vue'
 
 /*Tareas */
 import NuevaTarea from '../views/docentes/tareas/Nueva.vue'
+import VerTarea from '../views/docentes/tareas/Menu.vue'
+import EditarTarea from '../views/docentes/tareas/Editar.vue'
 
 const routes = [
   {
@@ -159,6 +161,19 @@ const routes = [
     component:NuevaTarea,
     props:true
   },
+  {
+    path: '/tarea/ver/:clase/:grado',
+    name:'VerTarea',
+    component:VerTarea,
+    props:true
+  },
+  {
+    path: '/tarea/editar/:id',
+    name:'EditarTarea',
+    component:EditarTarea,
+    props:true
+  },
+
 
   /* Encargado */
   

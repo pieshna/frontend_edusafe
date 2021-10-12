@@ -1,8 +1,7 @@
 <template>
 <div class="container">
-  <h1 class="text-center">Nueva Tarea</h1>
-  <br>
-  <Tarea :grado=gradoId :materia=claseId />
+  <h1>Editar Tarea</h1>
+  <Tarea :tareaId=id />
 </div>
 </template>
 
@@ -11,8 +10,7 @@ import Tarea from "@/components/Tarea.vue"
 export default {
 nombre:"NuevaTarea",
 props: {
-    claseId:null,
-    gradoId:null
+    id:null,
 },
 components: {
 Tarea

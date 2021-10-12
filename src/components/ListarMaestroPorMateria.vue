@@ -1,10 +1,14 @@
 <template>
-<div class="list-group">
-    <a v-if="datos.length<1" class="list-group-item list-group-item-action">No hay Docentes asociados</a>
-    <a v-for="data in datos" :key=data.id class="list-group-item list-group-item-action">{{data.nombre}} {{data.apellido}}
-      <router-link :to="url+data.id"><i class='bx bx-edit-alt'></i></router-link>
-    </a>
-</div>
+  <div class="list-group">
+    <a v-if="datos.length < 1" class="list-group-item list-group-item-action"
+      >No hay Docentes asociados</a
+    >
+    <a v-for="data in datos" :key="data.id" class="list-group-item list-group-item-action"
+      >{{ data.nombre }} {{ data.apellido }}
+      <router-link :to="url + data.id"><i class="bx bx-edit-alt"></i></router-link> </a
+    ><!-- 
+    {{datos}} -->
+  </div>
 </template>
 
 <script>
@@ -12,13 +16,13 @@ import axios from "axios";
 export default {
   name: "ListarMaestroPorMateria",
   props: {
-    id:null,
+    id: null,
   },
   data() {
     return {
       host: process.env.VUE_APP_DB_HOST,
       datos: {},
-      url:"/asignacion/editar/"
+      url: "/asignacion/editar/",
     };
   },
   methods: {
@@ -29,13 +33,13 @@ export default {
     },
   },
   created() {
-      this.listar()
+    this.listar();
   },
 };
 </script>
 
 <style scoped>
-.bx{
-color:black;
+.bx {
+  color: black;
 }
 </style>

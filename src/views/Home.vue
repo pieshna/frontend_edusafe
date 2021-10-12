@@ -50,7 +50,7 @@
         </div>
       </div>
     </div>
-    <div class="container">
+    <div class="container" v-if="this.$localStorage.get('salt') == 3">
       <h1 class="text-center">Materias</h1>
       <br />
       <div class="row justify-content-between">
