@@ -28,10 +28,14 @@ import AuthLogin from '../views/auth/login.vue'
 /*Ver Clase */
 import VerClase from '../views/docentes/VerClase.vue'
 
-/*Tareas */
+/*Tareas de parte de Docente*/
 import NuevaTarea from '../views/docentes/tareas/Nueva.vue'
 import VerTarea from '../views/docentes/tareas/Menu.vue'
 import EditarTarea from '../views/docentes/tareas/Editar.vue'
+
+/*Tareas de parte de alumnos */
+import VerTareasAlumno from '../views/alumnos/tareas/Ver.vue'
+import NuevaTareaAlumno from '../views/alumnos/tareas/NuevaTarea.vue'
 
 const routes = [
   {
@@ -154,7 +158,7 @@ const routes = [
     props:true
   },
 
-  /*Tareas */
+  /*Tareas de parte de docente*/
   {
     path: '/tarea/nueva/:claseId/:gradoId',
     name:'NuevaTarea',
@@ -174,6 +178,19 @@ const routes = [
     props:true
   },
 
+  /*Tareas de parte de Alumno */
+  {
+    path: '/ver/tarea/:id',
+    name: 'VerTareasAlumno',
+    component:VerTareasAlumno,
+    props:true
+  },
+  {
+    path: '/nueva/tarea/:id',
+    name: 'NuevaTareaAlumno',
+    component:NuevaTareaAlumno,
+    props:true
+  },
 
   /* Encargado */
   

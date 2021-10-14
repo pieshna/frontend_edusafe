@@ -9,8 +9,10 @@
   "dependencies": {
     "axios": "^0.21.4",
     "core-js": "^3.6.5",
+    "filepond": "^4.30.3",
     "vue": "^3.0.0",
     "vue-axios": "^3.3.7",
+    "vue-filepond": "^7.0.2",
     "vue-router": "^4.0.0-0",
     "vue-web-storage": "^6.1.0",
     "vuex": "^4.0.0-0"

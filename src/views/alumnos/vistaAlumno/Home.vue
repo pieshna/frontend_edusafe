@@ -19,8 +19,8 @@
               <p class="card-text">
                 {{ materia.docenteNombre }} {{ materia.docenteApellido }}
               </p>
-
-              <a href="#" class="btn btn-primary">Ver Clase</a>
+<router-link :to="'/ver/tarea/'+materia.id">
+              <a class="btn btn-primary">Ver Clase</a></router-link>
             </div>
           </div>
         </div>
