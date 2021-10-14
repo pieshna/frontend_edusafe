@@ -49,7 +49,7 @@ export default {
   },
   data() {
     return {
-        contador:1,
+        contador:-299,
       tareasActuales: null,
       host: process.env.VUE_APP_DB_HOST,
       claseNombre: null,

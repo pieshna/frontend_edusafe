@@ -4,10 +4,10 @@
       >No hay Docentes asociados</a
     >
     <a v-for="data in datos" :key="data.id" class="list-group-item list-group-item-action"
-      >{{ data.nombre }} {{ data.apellido }}
+      >{{ data.nombre }} {{ data.apellido }} - {{data.gradoNombre}}
       <router-link :to="url + data.id"><i class="bx bx-edit-alt"></i></router-link> </a
-    ><!-- 
-    {{datos}} -->
+    >
+    <!-- {{datos}} -->
   </div>
 </template>
 

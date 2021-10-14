@@ -32,8 +32,8 @@ export default {
   data() {
     return {
       credenciales: {
-        usuario: "mmpm@gmail.com",
-        password: "ldkafjslkdfj",
+        usuario: "estudiantep",
+        password: "hola1234",
       },
       mensaje:"",
       host: process.env.VUE_APP_DB_HOST,

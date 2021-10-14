@@ -60,7 +60,7 @@ export default {
     },
     promedio() {
       let sumaDeTotales = 0;
-      let sumaDeAlumno=2.4
+      let sumaDeAlumno=0
       if(this.tarea==null){
         return
       }
