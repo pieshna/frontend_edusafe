@@ -26,6 +26,9 @@
                 <td >
                     <router-link :to="'/tarea/editar/'+tarea.id">
                     <a class="btn btn-primary">Editar</a>
+                    </router-link> - 
+                    <router-link :to="'/verentregas/'+tarea.id">
+                    <a class="btn btn-success">Ver Entregas</a>
                     </router-link>
                 </td>
             </tr>

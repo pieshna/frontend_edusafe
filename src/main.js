@@ -7,7 +7,9 @@ import VueAxios from "vue-axios";
 import axios from "axios";
 
 createApp(App)
-.use(StoragePlugin)
+.use(StoragePlugin,{
+  drivers:['session','local']
+})
   .use(router)
   .use(router)
   .use(store)

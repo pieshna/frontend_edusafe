@@ -1,6 +1,6 @@
 <template>
-  <Sidebar v-if="this.$localStorage.get('token') !=null" />
-  <router-view v-if="this.$localStorage.get('token') ==null"  />
+  <Sidebar v-if="this.$sessionStorage.get('token') !=null" />
+  <router-view v-if="this.$sessionStorage.get('token') ==null"  />
 </template>
 <script>
 // @ is an alias to /src
@@ -10,7 +10,7 @@ export default {
   components: {
     Sidebar
   },created(){
-    if(this.$localStorage.get('token')==null){
+    if(this.$sessionStorage.get('token')==null){
       this.$router.push('/login')
     }
   }

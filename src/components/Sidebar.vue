@@ -96,6 +96,7 @@ export default {
     },
     cerrarSesion() {
       this.$localStorage.clear();
+      this.$sessionStorage.clear();
       this.$router.go("/");
     },
   },

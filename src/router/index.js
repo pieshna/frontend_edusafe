@@ -32,6 +32,7 @@ import VerClase from '../views/docentes/VerClase.vue'
 import NuevaTarea from '../views/docentes/tareas/Nueva.vue'
 import VerTarea from '../views/docentes/tareas/Menu.vue'
 import EditarTarea from '../views/docentes/tareas/Editar.vue'
+import VerTareasAlumnos from '../views/docentes/tareas/VerTareasAlumnos.vue'
 
 /*Tareas de parte de alumnos */
 import VerTareasAlumno from '../views/alumnos/tareas/Ver.vue'
@@ -175,6 +176,12 @@ const routes = [
     path: '/tarea/editar/:id',
     name:'EditarTarea',
     component:EditarTarea,
+    props:true
+  },
+  {
+    path: '/verentregas/:id',
+    name: "VerTareasAlumnos",
+    component:VerTareasAlumnos,
     props:true
   },
 

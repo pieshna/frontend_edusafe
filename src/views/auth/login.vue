@@ -40,7 +40,7 @@ export default {
     };
   },
   created() {
-    if (this.$localStorage.get("token") != null) {
+    if (this.$sessionStorage.get("token") != null) {
       this.$router.push("/");
     }
   },
@@ -65,7 +65,7 @@ export default {
         .then((response) => {
           if (response.status == 200) {
             console.log(response.data);
-            this.$localStorage.set("token", "hola");
+            this.$sessionStorage.set("token", "hola");
             this.$localStorage.set("salt", response.data.rol);
             this.$localStorage.set("teken", response.data.id);
             this.$localStorage.set("photo", response.data.foto);
