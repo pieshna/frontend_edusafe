@@ -110,6 +110,7 @@ export default {
             this.puedeEnviarse=false;
         }else{
             document.querySelector('input[type="text"]').classList.remove("inputerror")
+            this.puedeEnviarse=true;
         }
         }
   },
