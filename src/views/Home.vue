@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!-- Director/Secretario -->
     <div class="container" v-if="this.$localStorage.get('salt') < 3">
       <h1 class="text-center">Bienvenido</h1>
       <br /><br />
@@ -50,7 +51,8 @@
         </div>
       </div>
     </div>
-    <div class="container">
+    <!-- Docente -->
+    <div class="container" v-if="this.$localStorage.get('salt') == 3">
       <h1 class="text-center">Materias</h1>
       <br />
       <div class="row justify-content-between">
@@ -67,19 +69,23 @@
           </div>
         </div>
       </div>
+    {{materiasDeDocente}}
     </div>
-    <!-- {{materiasDeDocente}} -->
+    <!-- Estudiante -->
+    <HomeAlumno v-if="this.$localStorage.get('salt')==4" />
   </div>
 </template>
 
 <script>
 import axios from "axios";
 import ListaGradosHome from "@/components/ListaGradosHome";
+import HomeAlumno from "./alumnos/vistaAlumno/Home.vue"
 
 export default {
   name: "Home",
   components: {
     ListaGradosHome,
+    HomeAlumno,
   },
   data() {
     return {
@@ -130,7 +136,11 @@ export default {
             let nombreMateria = responses[0].data[materia].nombre;
             let gradoMateria=[]
             for (let grado = 0; grado < responses[1].data.length; grado++) {
-              if (responses[1].data[grado].materiaPerteneciente == materia + 1){
+              console.log(responses[1].data[grado]);
+              console.log(responses[1].data[grado].materiaPerteneciente);
+              console.log(materia+1);
+              if (responses[1].data[grado].materiaPerteneciente == responses[0].data[materia].id){
+                console.log("entro if");
                 gradoMateria.push(responses[1].data[grado])
               }
             }

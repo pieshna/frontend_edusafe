@@ -3,8 +3,8 @@
     <h1>{{ mensaje }}</h1>
     <!-- Imagen Dinamica -->
     <div>
-      <img :src="host + 'ver/' + persona.foto" v-if="persona.foto != ''" />
-      <img :src="host + 'ver/' + hotImagen.urlImagen" v-if="persona.foto == ''" />
+      <img :src="host + 'ver/' + persona.foto" v-if="hotImagen.urlImagen == 'profile.png'" />
+      <img :src="hotImagen.urlImagen" v-if="hotImagen.urlImagen != 'profile.png'" />
       <br />
     </div>
     <form @submit.prevent="envioPersona()">
@@ -77,6 +77,12 @@
           <input type="text" v-model="encargado.numero" disabled />
         </div>
       </div>
+
+      <div class="form-group col-md-6">
+        <label>Imagen</label>
+        <br />
+        <input type="file" name="img" @change="onFileChange" accept="image/*" />
+      </div>
       <input type="submit" value="Guardar" />
     </form>
     <!-- {{ persona }}
@@ -139,9 +145,8 @@ export default {
     } else if (this.rol == 4) {
       this.persona.rol = this.rol;
       this.resetEncargado();
-    }else{
+    } else {
       this.persona.rol = this.rol;
-      
     }
   },
   methods: {
@@ -213,28 +218,42 @@ export default {
                 }
               });
             }
-            this.enviado =true
+            this.enviado = true;
             //console.log({ mensaje: "resultado", result });
           } catch (error) {
             console.log({ Error: "error en try", error });
-            this.enviado = false
-          } 
+            this.enviado = false;
+          }
         } else {
+          //editar usuario empieza aquui
           try {
-            await axios
+            this.persona.foto = this.hotImagen.imagen;
+            //console.log(this.persona);
+            let dataForm = new FormData();
+            dataForm.append("foto", this.hotImagen.imagen);
+            /* console.log(dataForm); */
+            await axios.post(this.host + "upload/foto",dataForm).then((response) =>{
+              this.persona.foto=response.data.filename
+              if(this.$localStorage.get("salt")==this.persona.id){
+                this.$localStorage.set("photo",response.data.filename)
+              }
+
+             axios
               .put(this.host + "usuario/" + this.persona.id, this.persona)
               .then((response) => {});
             if (this.rol == 4) {
-              await axios
+              axios
                 .put(this.host + "alumno/" + this.estudiante.usuario_id, this.estudiante)
                 .then((response) => {});
-            }
-            this.enviado =true
+            } })
+            this.enviado = true;
           } catch (error) {
-            this.enviado =false
+            this.enviado = false;
             console.log({ Error: "error en try", error });
           }
         }
+      } else {
+        console.log("Ya se guardo");
       }
     },
     async datosCarreras() {
@@ -305,7 +324,7 @@ export default {
       this.hotImagen.imagen = event.target.files[0];
       //this.producto.imagen=`${fileData.name}`;
       this.hotImagen.urlImagen = URL.createObjectURL(this.hotImagen.imagen);
-      console.log(this.hotImagen.imagen);
+      /* console.log(this.hotImagen.imagen); */
     },
     genPassword() {
       this.persona.password = Math.random()
