@@ -3,7 +3,7 @@
     <h1>Ver Tarea</h1>
     <!-- 
     {{tareasRecibidas.length}} {{index}} -->
-    <button @click="index++" v-if="index + 1 < tareasRecibidas.length">next</button>
+    <button @click="subir" v-if="index + 1 < tareasRecibidas.length">next</button>
     <div class="container" v-if="tareasRecibidas[index] != null">
       <p>Entrega de: {{ tareasRecibidas[index].nombre }} {{ tareasRecibidas[index].apellido }}</p>
       <div class="row">
@@ -15,20 +15,32 @@
             <div class="form-floating">
                 <div class="text-center" v-if="tareaActual!=null">
                 <p>Asignar nota:</p>
-                <input type="text" v-model="punteo" @keyup="validacion"> / {{tareaActual[0].punteo}}</div>
+                <input type="text" v-model="punteoTarea.punteo" @keyup="validacion" v-if="punteoTarea!= null" disabled>
+                <input type="text" v-model="punteo" @keyup="validacion"
+                v-if="punteoTarea== null"> / {{tareaActual[0].punteo}}</div>
                 <br>
                 <div class="form-floating">
               <textarea
                 class="form-control"
                 placeholder="comentario"
+                v-model="punteoTarea.comentario"
+                id="floatingTextarea"
+                 style="height: 5rem"
+                 v-if="punteoTarea!= null"
+                 disabled
+              ></textarea>
+              <textarea
+                class="form-control"
+                placeholder="comentario"
                 v-model="comentario"
+                v-if="punteoTarea== null"
                 id="floatingTextarea"
                  style="height: 5rem"
               ></textarea>
               <label for="floatingTextarea">Comentario de la entrega</label>
             </div>
                 <br>
-                <button class="btn btn-success" @click="guardar">Guardar</button>
+                <button class="btn btn-success" v-if="punteoTarea== null"  @click="guardar">Guardar</button>
             </div>
             <br>
             <div class="form-floating">
@@ -76,6 +88,7 @@ export default {
       comentario:"",
       punteo: "",
       puedeEnviarse:true,
+      punteoTarea:null,
     };
   },
   methods: {
@@ -85,6 +98,10 @@ export default {
       });
       await axios.get(this.host + "tarea/ver/"+this.id).then((res) => {
           this.tareaActual = res.data;
+          if(this.index==0){
+            
+          this.consultarNota()
+          }
            });
     },
     async guardar(){
@@ -112,10 +129,20 @@ export default {
             document.querySelector('input[type="text"]').classList.remove("inputerror")
             this.puedeEnviarse=true;
         }
+        },
+        async consultarNota(){
+          await axios.get(this.host + "tarea/notaactual/"+this.tareasRecibidas[this.index].tareaId).then((res) => {
+            this.punteoTarea=res.data[0]
+          })
+        },
+        subir(){
+          this.index++
+          this.consultarNota()
         }
   },
   created() {
     this.obtenerDatos();
+    
   },
 };
 </script>
